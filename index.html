@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Moon – تحديث هام</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --deep: #060b14;
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --gold-dim: rgba(201,168,76,0.15);
+    --silver: #8fa3c0;
+    --white: #eef2f7;
+    --cream: #f5f0e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'Tajawal', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ── starfield ── */
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  }
+  .stars::before, .stars::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 50% 40%, rgba(201,168,76,0.5), transparent),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 20% 85%, rgba(201,168,76,0.4), transparent),
+      radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 75% 80%, rgba(201,168,76,0.3), transparent);
+    background-size: 400px 400px;
+    animation: twinkle 6s ease-in-out infinite alternate;
+  }
+  .stars::after {
+    background-size: 300px 300px;
+    animation-delay: -3s;
+    animation-duration: 9s;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.6; }
+    to   { opacity: 1; }
+  }
+
+  /* ── hero gradient ── */
+  .hero-glow {
+    position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── wrapper ── */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 820px; margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* ── moon header ── */
+  .moon-header {
+    text-align: center; margin-bottom: 60px;
+    animation: fadeDown 1s ease both;
+  }
+  .logo-img {
+    width: 140px; height: 140px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.5));
+    margin-bottom: 16px;
+    animation: moonPulse 4s ease-in-out infinite;
+    display: block; margin-left: auto; margin-right: auto;
+  }
+  .brand-ar {
+    font-size: 18px; font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-top: 2px; margin-bottom: 4px;
+    opacity: 0.85;
+  }
+    font-size: 72px; line-height: 1;
+    filter: drop-shadow(0 0 30px rgba(201,168,76,0.6));
+    animation: moonPulse 4s ease-in-out infinite;
+    display: block; margin-bottom: 20px;
+  }
+  @keyframes moonPulse {
+    0%,100% { filter: drop-shadow(0 0 25px rgba(201,168,76,0.5)); }
+    50%      { filter: drop-shadow(0 0 50px rgba(201,168,76,0.9)); }
+  }
+  .brand {
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), #a07830);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .tagline {
+    font-size: 16px; color: var(--silver); margin-top: 8px; font-weight: 300;
+    letter-spacing: 2px;
+  }
+
+  /* ── divider ── */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 40px 0; opacity: 0.5;
+  }
+
+  /* ── ramadan greeting ── */
+  .greeting-card {
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px;
+    padding: 36px 40px;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative; overflow: hidden;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .greeting-card::before {
+    content: '☪';
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    font-size: 80px; opacity: 0.05; color: var(--gold);
+  }
+  .greeting-card h2 {
+    font-size: 22px; font-weight: 700; color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+  .greeting-card p {
+    font-size: 15px; line-height: 2; color: #c8d4e0; font-weight: 300;
+  }
+
+  /* ── main announcement ── */
+  .announcement {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 32px;
+    animation: fadeUp 1s 0.35s ease both;
+  }
+  .announcement p {
+    font-size: 15px; line-height: 2.2; color: #c8d4e0;
+  }
+  .announcement .highlight {
+    color: var(--gold-light); font-weight: 600;
+  }
+
+  /* ── timeline ── */
+  .timeline {
+    display: flex; gap: 16px; margin: 32px 0;
+    animation: fadeUp 1s 0.45s ease both;
+  }
+  .timeline-item {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .timeline-item:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: rgba(201,168,76,0.06);
+  }
+  .timeline-item .date {
+    font-size: 24px; font-weight: 900;
+    color: var(--gold); margin-bottom: 4px;
+  }
+  .timeline-item .date-label {
+    font-size: 13px; color: var(--silver); margin-bottom: 10px;
+  }
+  .timeline-item .desc {
+    font-size: 13px; color: #8fa3c0; line-height: 1.7;
+  }
+  .timeline-arrow {
+    display: flex; align-items: center; font-size: 22px;
+    color: rgba(201,168,76,0.4); flex-shrink: 0;
+  }
+
+  /* ── sections ── */
+  .section {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 24px;
+    animation: fadeUp 1s ease both;
+  }
+  .section-title {
+    font-size: 18px; font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .icon { font-size: 22px; }
+  .section ul {
+    list-style: none; display: flex; flex-direction: column; gap: 14px;
+  }
+  .section ul li {
+    font-size: 14px; line-height: 1.9; color: #b8c8d8;
+    padding-right: 20px;
+    position: relative;
+  }
+  .section ul li::before {
+    content: '◈';
+    position: absolute; right: 0;
+    color: var(--gold); font-size: 10px; top: 5px;
+  }
+  .section ul li strong { color: var(--white); font-weight: 600; }
+
+  /* ── refund steps ── */
+  .steps {
+    display: flex; flex-direction: column; gap: 12px; margin-top: 8px;
+  }
+  .step {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 10px; padding: 16px 20px;
+    transition: border-color 0.3s;
+  }
+  .step:hover { border-color: rgba(201,168,76,0.4); }
+  .step-num {
+    width: 30px; height: 30px; flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--deep);
+    font-weight: 900; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-text { font-size: 14px; line-height: 1.8; color: #c0d0e0; }
+
+  /* ── CTA whatsapp ── */
+  .cta-box {
+    text-align: center; margin: 32px 0;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+  .cta-box p { font-size: 14px; color: var(--silver); margin-bottom: 16px; }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff; font-family: 'Tajawal', sans-serif;
+    font-size: 16px; font-weight: 700;
+    padding: 14px 36px; border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(37,211,102,0.5);
+  }
+  .whatsapp-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  /* ── note box ── */
+  .note-box {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px; padding: 18px 22px;
+    font-size: 13px; color: #b0c0d0; line-height: 1.9;
+    margin-top: 20px;
+  }
+  .note-box strong { color: var(--gold-light); }
+
+  /* ── future section ── */
+  .future-card {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(10,15,30,0.9), rgba(15,20,40,0.9));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px; padding: 50px 40px;
+    margin-bottom: 32px;
+    position: relative; overflow: hidden;
+    animation: fadeUp 1s 0.8s ease both;
+  }
+  .future-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.1), transparent 70%);
+    pointer-events: none;
+  }
+  .future-card h3 {
+    font-size: 26px; font-weight: 900; color: var(--gold-light); margin-bottom: 16px;
+  }
+  .future-card p {
+    font-size: 15px; line-height: 2; color: #a0b4c8; max-width: 520px; margin: 0 auto;
+  }
+
+  /* ── footer ── */
+  .footer {
+    text-align: center; color: rgba(143,163,192,0.5);
+    font-size: 13px; padding-top: 20px;
+    animation: fadeUp 1s 1s ease both;
+  }
+  .footer span { color: var(--gold); opacity: 0.7; }
+
+  /* ── animations ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .s1 { animation-delay: 0.5s; }
+  .s2 { animation-delay: 0.6s; }
+  .s3 { animation-delay: 0.65s; }
+  .s4 { animation-delay: 0.7s; }
+
+  /* ── responsive ── */
+  @media (max-width: 600px) {
+    .timeline { flex-direction: column; }
+    .timeline-arrow { transform: rotate(90deg); align-self: center; }
+    .section, .announcement, .greeting-card { padding: 28px 22px; }
+    .future-card { padding: 36px 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="hero-glow"></div>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="moon-header">
+    <img 
+      src="https://www.dropbox.com/scl/fi/6nvf9t6z5synnyoayqkgv/.png?rlkey=z8sg3oywwzum03q9i6t09zcg3&st=6wzv7tv1&raw=1"
+      alt="Techmoonsa Logo"
+      class="logo-img"
+    >
+    <div class="brand">Techmoonsa</div>
+    <div class="brand-ar">تيك مون</div>
+    <div class="tagline">نودّعكم لنرتقي بخدمتكم</div>
+  </div>
+
+  <!-- Ramadan greeting -->
+  <div class="greeting-card">
+    <h2>🌙 رمضان مبارك</h2>
+    <p>
+      عملاءنا الأعزاء، عائلة Tech Moon،<br>
+      مع حلول شهر رمضان المبارك، نسأل الله أن يتقبل منا ومنكم صالح الأعمال،<br>
+      وأن يعيده عليكم بالخير والبركات.
+    </p>
+  </div>
+
+  <!-- Announcement -->
+  <div class="announcement">
+    <p>
+      لأنكم كنتم <span class="highlight">شركاء النجاح</span> طوال الفترة الماضية، نود مشاركتكم قراراً هاماً
+      بخصوص مستقبل خدماتنا. انطلاقاً من حرصنا على تقديم الأفضل دائماً، قررنا البدء
+      بمرحلة <span class="highlight">إعادة هيكلة شاملة</span> لنموذج عملنا، مما يتطلب إيقاف الخدمات الحالية
+      بشكل تدريجي. هذا القرار ليس نهاية الطريق، بل هو خطوة مدروسة للتحول نحو نموذج
+      تشغيل أكثر استقراراً وقوة لنلبي تطلعاتكم مستقبلاً.
+    </p>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="date">25</div>
+      <div class="date-label">فبراير 2025</div>
+      <div class="desc">بدء الإيقاف التدريجي للخدمات</div>
+    </div>
+    <div class="timeline-arrow">←</div>
+    <div class="timeline-item">
+      <div class="date">30</div>
+      <div class="date-label">فبراير 2025</div>
+      <div class="desc">الإغلاق الكامل للعمليات الحالية</div>
+    </div>
+    <div class="timeline-arrow">←</div>
+    <div class="timeline-item">
+      <div class="date">5</div>
+      <div class="date-label">مارس 2025</div>
+      <div class="desc">آخر موعد لطلبات الاسترجاع</div>
+    </div>
+  </div>
+
+  <!-- Rights -->
+  <div class="section s1">
+    <div class="section-title"><span class="icon">🔍</span> ماذا يعني هذا بالنسبة لك؟</div>
+    <ul>
+      <li><strong>استمرارية الخدمة:</strong> اشتراكك فعال ومستمر حتى تاريخ الإيقاف النهائي (30 فبراير).</li>
+      <li><strong>ضمان المستحقات:</strong> في حال وجود مدة مدفوعة متبقية بعد تاريخ الإغلاق، نضمن لكم استردادها بكل سلاسة.</li>
+    </ul>
+  </div>
+
+  <!-- Refund -->
+  <div class="section s2">
+    <div class="section-title"><span class="icon">💰</span> آلية استرجاع المبالغ</div>
+    <p style="font-size:14px; color:#8fa3c0; margin-bottom:20px; line-height:1.9;">
+      بسبب سياسات منصة "سلة" التقنية التي لا تتيح الاسترجاع المباشر، سنقوم بتنفيذ التحويلات
+      يدوياً لضمان دقتها. يرجى تزويدنا بالبيانات التالية:
+    </p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">رقم الطلب</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">اسم الحساب</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">تفاصيل الحساب البنكي (الاسم الكامل + رقم الـ IBAN)</div>
+      </div>
+    </div>
+
+    <div class="note-box" style="margin-top:24px;">
+      <strong>📌 ملاحظات هامة:</strong><br>
+      • الاسترجاع يشمل الأرصدة المدفوعة فعلياً لمدة شهر فأكثر بعد 30 فبراير.<br>
+      • لا يسري الاسترجاع على الأشهر المجانية أو العروض الترويجية أو الهدايا.<br>
+      • سنستقبل طلباتكم حتى تاريخ <strong>5 مارس</strong> لإغلاق كافة الملفات المالية.
+    </div>
+  </div>
+
+  <!-- WhatsApp CTA -->
+  <div class="cta-box">
+    <p>للتواصل وإرسال بيانات الاسترجاع</p>
+    <a href="https://wa.me/message/AMQRYCSSIF67N1" class="whatsapp-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.083.533 4.043 1.47 5.756L0 24l6.406-1.446A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.79 9.79 0 01-5.006-1.374l-.359-.214-3.8.857.901-3.695-.234-.38A9.773 9.773 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+      </svg>
+      تواصل عبر واتساب
+    </a>
+  </div>
+
+  <!-- Panel sale -->
+  <div class="section s3">
+    <div class="section-title"><span class="icon">🏷</span> فرصة للمتخصصين – بيع اللوحة</div>
+    <ul>
+      <li><strong>المتطلب:</strong> خبرة سابقة في إدارة السيرفرات والتشغيل (لا يوجد تدريب من طرفنا).</li>
+      <li><strong>الميزة:</strong> ستحصل على بيانات التواصل مع الدعم الفني للمزود الأساسي (باللغة الإنجليزية).</li>
+      <li>للمناقشة الجادة فقط، يرجى التواصل عبر الواتساب.</li>
+    </ul>
+  </div>
+
+  <!-- Future -->
+  <div class="future-card">
+    <h3>🔄 Tech Moon .. ما القادم؟</h3>
+    <p>
+      نحن لا نغادر، بل نتطور. ندرس حالياً التحول لنموذج توزيع خدمات عبر سيرفرات عالمية
+      أكثر استقراراً. قد تتغير الوسيلة، لكن علاقتنا بكم واسمنا الذي وثقتم به باقٍ.
+      <br><br>
+      <strong style="color: var(--gold-light);">انتظرونا في ثوبنا الجديد قريباً.</strong>
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>شكراً لأنكم كنتم جزءاً من رحلتنا ✨</p>
+    <p style="margin-top:8px;">كان شرفاً لنا خدمتكم &nbsp;|&nbsp; <span>Techmoonsa 🌙</span></p>
+  </div>
+
+</div>
+</body>
+</html>
